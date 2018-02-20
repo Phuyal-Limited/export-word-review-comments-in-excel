@@ -14,7 +14,7 @@ Dim strTemp
 Dim myRange As Range
 Set xlApp = CreateObject("Excel.Application")
 xlApp.Visible = True
-Set xlWB = xlApp.Workbooks.Add ‘create a new workbook
+Set xlWB = xlApp.Workbooks.Add 'create a new workbook
 With xlWB.Worksheets(1)
 ' Create Heading
     HeadingRow = 1
@@ -56,11 +56,12 @@ Function ParentLevel(Para As Word.Paragraph) As String
     If sStyle = “Head” Then
         GoTo Skip
     End If
-    Do While ParaAbove.OutlineLevel = Para.OutlineLevel
+    Do Until ParaAbove.OutlineLevel = Para.OutlineLevel
         Set ParaAbove = ParaAbove.Previous
     Loop
 Skip:
     strTitle = ParaAbove.Range.Text
-    strTitle = Left(strTitle, Len(strTitle) – 1)
+    strTitle = Left(strTitle, Len(strTitle) - 1)
+    
     ParentLevel = ParaAbove.Range.ListFormat.ListString & " " & strTitle
 End Function
